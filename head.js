@@ -53,15 +53,18 @@ var BUTTON_OPTIONS =
 	},
 ];
 
-var BUTTON_MAPPING = BUTTON_OPTIONS[currentControl];
-document.getElementById('controlinfo').innerText = BUTTON_MAPPING.desc;
+var controlinfo = document.getElementById('controlinfo');
+var changecontrols = document.getElementById('changecontrols');
 
-document.getElementById('changecontrols').addEventListener("click", function()
+var BUTTON_MAPPING = BUTTON_OPTIONS[currentControl];
+if (controlinfo) controlinfo.innerText = BUTTON_MAPPING.desc;
+
+if (changecontrols) changecontrols.addEventListener("click", function()
 {
 	currentControl += 1;
 	currentControl %= BUTTON_OPTIONS.length;
 	BUTTON_MAPPING = BUTTON_OPTIONS[currentControl];
-	document.getElementById('controlinfo').innerText = BUTTON_MAPPING.desc;
+	if (controlinfo) controlinfo.innerText = BUTTON_MAPPING.desc;
 	return false;
 });
 
