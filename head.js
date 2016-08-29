@@ -3,28 +3,67 @@ var ctx = canvas.getContext('2d');
 ctx.imageSmoothingEnabled = false;
 canvas.width = 800;
 canvas.height = 600;
-document.body.appendChild(canvas);
+document.getElementById('container').appendChild(canvas);
 
 var BUTTON_UP = 0,
 	BUTTON_DOWN = 1,
 	BUTTON_LEFT = 2,
 	BUTTON_RIGHT = 3,
-	BUTTON_JUMP = 4;
+	BUTTON_JUMP = 4,
+	BUTTON_KILL = 5;
 
-var BUTTON_MAPPING =
+var currentControl = 0;
+var BUTTON_OPTIONS =
+[
+	{
+		'desc': 'WASD for movement, SPACE to jump, ESC to kill self',
+		'key_65': BUTTON_LEFT,
+		'key_87': BUTTON_UP,
+		'key_83': BUTTON_DOWN,
+		'key_68': BUTTON_RIGHT,
+		'key_32': BUTTON_JUMP,
+		'key_27': BUTTON_KILL,
+	},
+	{
+		'desc': 'Arrow keys for movement, SPACE to jump, ESC to kill self',
+		'key_37': BUTTON_LEFT,
+		'key_38': BUTTON_UP,
+		'key_40': BUTTON_DOWN,
+		'key_39': BUTTON_RIGHT,
+		'key_32': BUTTON_JUMP,
+		'key_27': BUTTON_KILL,
+	},
+	{
+		'desc': 'Gamepad #1',
+		'joy_0_14': BUTTON_LEFT,
+		'joy_0_12': BUTTON_UP,
+		'joy_0_13': BUTTON_DOWN,
+		'joy_0_15': BUTTON_RIGHT,
+		'joy_0_0': BUTTON_JUMP,
+		'joy_0_3': BUTTON_KILL,
+	},
+	{
+		'desc': 'ZQSD for movement, SPACE to jump, ESC to kill self',
+		'key_81': BUTTON_LEFT,
+		'key_90': BUTTON_UP,
+		'key_83': BUTTON_DOWN,
+		'key_68': BUTTON_RIGHT,
+		'key_32': BUTTON_JUMP,
+		'key_27': BUTTON_KILL,
+	},
+];
+
+var BUTTON_MAPPING = BUTTON_OPTIONS[currentControl];
+document.getElementById('controlinfo').innerText = BUTTON_MAPPING.desc;
+
+document.getElementById('changecontrols').addEventListener("click", function()
 {
-	'key_65': BUTTON_LEFT,
-	'key_87': BUTTON_UP,
-	'key_83': BUTTON_DOWN,
-	'key_68': BUTTON_RIGHT,
-	'key_32': BUTTON_JUMP,
-
-	'joy_0_14': BUTTON_LEFT,
-	'joy_0_12': BUTTON_UP,
-	'joy_0_13': BUTTON_DOWN,
-	'joy_0_15': BUTTON_RIGHT,
-	'joy_0_0': BUTTON_JUMP,
-};
+	currentControl += 1;
+	currentControl %= BUTTON_OPTIONS.length;
+	BUTTON_MAPPING = BUTTON_OPTIONS[currentControl];
+	document.getElementById('controlinfo').innerText = BUTTON_MAPPING.desc;
+	return false;
+});
 
 var pressedButtons = {};
 var rawKeys = {};

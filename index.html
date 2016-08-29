@@ -5,13 +5,17 @@
 	<style>
 		body
 		{
-			padding: 0;
-			margin: 0;
 			background: black;
+			color: white;
+			font-family: sans-serif;
+			font-size: x-small;
+		}
+
+		a {
+			color: red;
 		}
 
 		canvas {
-			border: 1px solid red;
 			image-rendering: optimizeSpeed;             /* Older versions of FF          */
 			image-rendering: -moz-crisp-edges;          /* FF 6.0+                       */
 			image-rendering: -webkit-optimize-contrast; /* Safari                        */
@@ -22,6 +26,14 @@
 	</style>
 </head>
 <body>
+	<div id="container"></div>
+	<div id="info">
+		<p>Only tested in Chrome
+			| <a href="http://www.github.com/authorblues/ludumdare36/">Source Code</a>
+			| <a href="http://ludumdare.com/compo/2016/08/24/welcome-to-ludum-dare-36/">Ludum Dare 36</a>
+		</p>
+		<p><strong>Controls:</strong> <span id="controlinfo"></span> <a href="#" id="changecontrols">Change?</a></p>
+	</div>
 </body>
 
 <script src="head.js"></script>

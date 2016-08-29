@@ -19,7 +19,7 @@ function updatePlayer(delta)
 	var p = player;
 
 	p.curhealth -= p.environDamage();
-	if (p.curhealth <= 0)
+	if (p.curhealth <= 0 || BUTTON_KILL in pressedButtons)
 	{
 		p.xspeed = 0;
 		p.yspeed = 0;
